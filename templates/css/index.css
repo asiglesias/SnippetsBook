@@ -1,0 +1,81 @@
+
+#sidebar{
+    background: #171B26;
+    width: 18%;
+    align-content: center;
+    text-align: center;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+#content{
+    position: absolute;
+    left: 18%;
+    right: 0;
+    height: 100%;
+    background-color: whitesmoke;
+    transition: 0.5s;
+}
+
+#sidebar_header
+{
+    padding-top: 60px;
+    padding-bottom: 40px;
+    color: whitesmoke;
+}
+
+#sidebar_menu{
+}
+
+#sidebar_menu ul li :hover{
+    background-color: #A127F2;
+}
+
+
+#sidebar_menu ul li:hover a{
+    color: whitesmoke;
+    opacity: 100%;
+    font-weight: bold;
+}
+
+#sidebar_menu ul li a{
+    color: whitesmoke;
+    opacity: 50%;
+    padding: 20px;
+}
+
+
+
+#hamburger{
+    margin: 50px;
+    margin-bottom: 0;
+    color: whitesmoke;
+    border: 0;
+    background: #171B26;
+    border-radius: 10px;
+    font-size: xx-large;
+}
+
+#hamburger:hover i
+{
+    transform: rotate(360deg);
+    transition: 1s;
+}
+
+#inner_content{
+    display: inline;
+}
+
+#snippet{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background: white;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+

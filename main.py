@@ -15,10 +15,21 @@
 # limitations under the License.
 #
 import webapp2
+from models.snippet import Snippet
+import jinja2
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        snippets = Snippet.query().order(-Snippet.creation_date)
+
+        data = {
+            "snippets": snippets
+        }
+
+        jinja = jinja2.get_jinja2(app=self.app)
+        self.response.write(jinja.render_template("index.html"), **data)
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
