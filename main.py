@@ -16,19 +16,19 @@
 #
 import webapp2
 from models.snippet import Snippet
-import jinja2
+from webapp2_extras import jinja2
 
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        snippets = Snippet.query().order(-Snippet.creation_date)
+        snippets = Snippet.query().order(-Snippet.creation_date).fetch()
 
         data = {
             "snippets": snippets
         }
 
         jinja = jinja2.get_jinja2(app=self.app)
-        self.response.write(jinja.render_template("index.html"), **data)
+        self.response.write(jinja.render_template("index.html", **data))
 
 
 app = webapp2.WSGIApplication([

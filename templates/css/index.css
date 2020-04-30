@@ -79,3 +79,35 @@
     padding: 20px;
 }
 
+.CodeMirror{
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.rate_group{
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+
+.btn-appdark{
+    background: #171B26;
+    opacity: 80%;
+    color: whitesmoke;
+}
+
+.btn-purple{
+    background: #A127F2;
+    opacity: 80%;
+    color: whitesmoke;
+}
+
+.btn-purple:hover{
+    color: whitesmoke;
+    opacity: 100%;
+}
+
+.btn-appdark:hover{
+    color: whitesmoke;
+    opacity: 100%;
+}
+

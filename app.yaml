@@ -9,6 +9,26 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /css/index.css
+  static_files: templates/css/index.css
+  upload: templates/css/index\.css
+
+- url: /js/index.js
+  static_files: templates/js/index.js
+  upload: templates/js/index\.js
+
+- url: /codemirror/lib/(.*\..*)
+  static_files: templates/codemirror/lib/\1
+  upload: templates/codemirror/lib/(.*\..*)
+
+- url: /codemirror/mode/(.*\..*)
+  static_files: templates/codemirror/mode/\1
+  upload: templates/codemirror/mode/(.*\..*)
+
+- url: /codemirror/theme/(.*\..*)
+  static_files: templates/codemirror/theme/\1
+  upload: templates/codemirror/theme/(.*\..*)
+
 - url: .*
   script: main.app
 

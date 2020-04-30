@@ -1,4 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
+    {% if snippets %}
+        {% for snippet in snippets %}
+            <div id="snippet">
+                <h2 style="color: #A127F2">{{snippet.name}}</h2>
+                <div style="display: inline-flex;">
+                    <h5>snippet.user</h5>
+                    <p style="color: lightgray; margin-left: 10px">{{snippet.creation_date}}</p>
+                </div>
+                <p>{{snippet.description}}</p>
+                <div id="code"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <div class="btn-group rate_group">
+                        <button class="btn btn-appdark"><i class="fas fa-minus" style="margin-right: 5px"></i><i class="fas fa-minus"></i></button>
+                        <p style="margin: 10px;">{{snippet.score}}</p>
+                        <button class="btn btn-purple"><i class="fas fa-plus" style="margin-right: 5px"></i><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var myCodeMirror = CodeMirror(document.getElementById("code"), {
+                    value: "{{ code }}",
+                    mode: "javascript",
+                    theme: "monokai",
+                    readOnly: true
+                });
+            </script>
+        {% endfor %}
+    {% else %}
+        <h3>No hay ningún snippet publicado aún</h3>
+    {% endif %}
+
 {% endblock %}
