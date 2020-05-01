@@ -21,5 +21,5 @@ function hideSidebar()
 
 function showSidebar()
 {
-    $('#content').css("left", '18%');
+    $('#content').css("left", '350px');
 }

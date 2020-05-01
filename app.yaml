@@ -9,9 +9,9 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /css/index.css
-  static_files: templates/css/index.css
-  upload: templates/css/index\.css
+- url: /css/(.*\.css)
+  static_files: templates/css/\1
+  upload: templates/css/(.*\.css)
 
 - url: /js/index.js
   static_files: templates/js/index.js
@@ -30,7 +30,7 @@ handlers:
   upload: templates/codemirror/theme/(.*\..*)
 
 - url: .*
-  script: main.app
+  script: handlers.main.app
 
 libraries:
 - name: webapp2

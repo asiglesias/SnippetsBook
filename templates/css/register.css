@@ -1,0 +1,20 @@
+ #register_form{
+
+ }
+
+ #content{
+ }
+
+ #register_frame{
+     position: sticky;
+     top: 30%;
+     right: 50%;
+     width: 50vh;
+     margin-right: auto;
+     margin-left: auto;
+     background: white;
+     border: 1px solid lightgray;
+     padding: 20px;
+     border-radius: 10px;
+     box-shadow: lightgray 5px 5px 5px;
+ }

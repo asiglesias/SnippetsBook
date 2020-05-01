@@ -17,6 +17,7 @@
 import webapp2
 from models.snippet import Snippet
 from webapp2_extras import jinja2
+from handlers.register import RegisterHandler
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -32,5 +33,6 @@ class MainHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/register', RegisterHandler)
 ], debug=True)

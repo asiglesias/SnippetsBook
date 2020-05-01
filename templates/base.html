@@ -17,6 +17,11 @@
         <link rel="stylesheet" href="codemirror/lib/codemirror.css">
         <link rel="stylesheet" href="codemirror/theme/monokai.css">
         <script src="codemirror/mode/javascript/javascript.js"></script>
+
+        {% block moreHeaders %}
+
+        {% endblock %}
+
     </head>
     <body>
         <nav id="sidebar">
@@ -39,7 +44,7 @@
                         <a href="#" class="nav-link">LOGIN</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">REGISTER</a>
+                        <a href="/register" class="nav-link">REGISTER</a>
                     </li>
                 </ul>
             </div>

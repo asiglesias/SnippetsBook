@@ -1,7 +1,7 @@
 
 #sidebar{
     background: #171B26;
-    width: 18%;
+    min-width: 350px;
     align-content: center;
     text-align: center;
     height: 100%;
@@ -13,7 +13,7 @@
 
 #content{
     position: absolute;
-    left: 18%;
+    left: 350px;
     right: 0;
     height: 100%;
     background-color: whitesmoke;

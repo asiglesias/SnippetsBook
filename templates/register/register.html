@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block moreHeaders %}
+    <link rel="stylesheet" href="css/register.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="register_frame">
+        <div class="row">
+            <div class="col-12">
+                <h2 style="text-align: center; margin-bottom: 20px">Create a new account</h2>
+            </div>
+        </div>
+        <form id="register_form" class="container" method="post" onsubmit="return validateAll()" action="/register">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" />
+                            <div class="invalid-feedback">
+                                Username can not be empty
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                            </div>
+                            <input type="email" class="form-control" id="email" placeholder="Email"/>
+                            <div class="invalid-feedback">
+                                Email can not be empty and must have the following syntax: example@example.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="password" placeholder="Password"/>
+                            <div class="invalid-feedback">
+                                Password can not be empty
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <center><input type="submit" class="btn btn-dark" value="Sing Up"></center>
+        </form>
+    </div>
+    <script>
+
+        function removeInvalid()
+        {
+            $("#username").removeClass('is-invalid');
+            $("#email").removeClass('is-invalid');
+            $("#password").removeClass('is-invalid');
+        }
+
+        function validateAll()
+        {
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            removeInvalid();
+
+            let allValid = true;
+            if(username.trim().length <= 0)
+            {
+                $("#username").addClass('is-invalid')
+                allValid = false;
+            }
+
+            if(! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+            {
+                $("#email").addClass('is-invalid')
+                allValid = false;
+            }
+
+            if(password.trim().length <= 0)
+            {
+                $("#password").addClass('is-invalid')
+                allValid = false;
+            }
+
+            return allValid;
+        }
+
+
+    </script>
+{% endblock %}
