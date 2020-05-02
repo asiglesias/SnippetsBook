@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+    <h1 style="text-align: center; margin-bottom: 60px">My Snippets</h1>
     {% if snippets %}
         {% for snippet in snippets %}
             <div class="snippet" style="margin-bottom: 100px">
@@ -16,9 +16,8 @@
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <div class="btn-group rate_group">
-                        <button class="btn btn-appdark"><i class="fas fa-minus" style="margin-right: 5px"></i><i class="fas fa-minus"></i></button>
-                        <p style="margin: 10px;">{{snippet.score}}</p>
-                        <button class="btn btn-purple"><i class="fas fa-plus" style="margin-right: 5px"></i><i class="fas fa-plus"></i></button>
+                        <button class="btn btn-purple" onclick="window.location.href='/mysnippets/delete?id={{ snippet.key.urlsafe() }}'"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-appdark"><i class="fas fa-edit"></i></button>
                     </div>
                 </div>
             </div>
@@ -34,7 +33,7 @@
             </script>
         {% endfor %}
     {% else %}
-        <h3 style="text-align: center; margin-top: 10%">No hay ningún snippet publicado aún</h3>
+        <h3 style="text-align: center; margin-top: 10%">You have not created any snippet yet</h3>
+        <button class="btn btn-purple" href="/newsnippet">Create my first snippet!</button>
     {% endif %}
-
-{% endblock %}
+{% endblock content%}

@@ -16,7 +16,7 @@
         <script src="codemirror/lib/codemirror.js"></script>
         <link rel="stylesheet" href="codemirror/lib/codemirror.css">
         <link rel="stylesheet" href="codemirror/theme/monokai.css">
-        <script src="codemirror/mode/javascript/javascript.js"></script>
+        <script src="codemirror/mode/clike/clike.js"></script>
 
         {% block moreHeaders %}
 
@@ -32,20 +32,26 @@
             <div id="sidebar_menu">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="" class="nav-link active">SNIPPETS</a>
+                        <a href="/" class="nav-link active">SNIPPETS</a>
+                    </li>
+                    {% if is_logged  %}
+                    <li class="nav-item">
+                        <a href="/newsnippet" class="nav-link">CREATE SNIPPET</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">CREATE SNIPPET</a>
+                        <a href="/mysnippets" class="nav-link">MY SNIPPETS</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">MY SNIPPETS</a>
+                        <a href="/logout" class="nav-link">LOGOUT</a>
                     </li>
+                    {% else %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link">LOGIN</a>
+                        <a href="/login" class="nav-link">LOGIN</a>
                     </li>
                     <li class="nav-item">
                         <a href="/register" class="nav-link">REGISTER</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

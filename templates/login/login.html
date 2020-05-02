@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block moreHeaders %}
+    <link rel="stylesheet" href="css/login.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="login_frame">
+        <div class="row">
+            <div class="col-12">
+                <h2 style="text-align: center; margin-bottom: 20px">Sing In</h2>
+            </div>
+        </div>
+        <form id="login_form" class="container" method="post" action="/login">
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" name="username" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            {% if invalid_username %}
+            <p class="text-danger">Invalid username or password</p>
+            {% endif %}
+
+            <center><input type="submit" class="btn btn-dark" value="Login"></center>
+        </form>
+    </div>
+{% endblock %}

@@ -1,4 +1,6 @@
-
+body{
+    background: whitesmoke;
+}
 #sidebar{
     background: #171B26;
     min-width: 350px;
@@ -14,8 +16,8 @@
 #content{
     position: absolute;
     left: 350px;
+    min-height: 100%;
     right: 0;
-    height: 100%;
     background-color: whitesmoke;
     transition: 0.5s;
 }
@@ -69,14 +71,30 @@
     display: inline;
 }
 
-#snippet{
+.snippet{
     border: 1px solid lightgray;
     border-radius: 10px;
     background: white;
-    width: 40%;
+    width: 40vw;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .snippet{
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        background: white;
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+    .snippet:first-of-type
+    {
+        margin-top: 20px;
+    }
 }
 
 .CodeMirror{

@@ -20,7 +20,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="username" placeholder="Username" />
+                            <input type="text" class="form-control" id="username" placeholder="Username" name="username" />
                             <div class="invalid-feedback">
                                 Username can not be empty
                             </div>
@@ -36,7 +36,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
                             </div>
-                            <input type="email" class="form-control" id="email" placeholder="Email"/>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email"/>
                             <div class="invalid-feedback">
                                 Email can not be empty and must have the following syntax: example@example.com
                             </div>
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="password" placeholder="Password"/>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
                             <div class="invalid-feedback">
                                 Password can not be empty
                             </div>
@@ -85,25 +85,24 @@
             let allValid = true;
             if(username.trim().length <= 0)
             {
-                $("#username").addClass('is-invalid')
+                $("#username").addClass('is-invalid');
                 allValid = false;
             }
 
             if(! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
             {
-                $("#email").addClass('is-invalid')
+                $("#email").addClass('is-invalid');
                 allValid = false;
             }
 
             if(password.trim().length <= 0)
             {
-                $("#password").addClass('is-invalid')
+                $("#password").addClass('is-invalid');
                 allValid = false;
             }
 
             return allValid;
         }
-
 
     </script>
 {% endblock %}

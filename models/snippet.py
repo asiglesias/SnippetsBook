@@ -1,6 +1,6 @@
 
 from google.appengine.ext import ndb
-from user import User
+from models.user import User
 
 
 class Snippet(ndb.Model):

@@ -16,15 +16,28 @@
 #
 import webapp2
 from models.snippet import Snippet
-from webapp2_extras import jinja2
+from models.user import User
+from webapp2_extras import jinja2, sessions
 from handlers.register import RegisterHandler
+from handlers.base import BaseHandler
+from handlers.login import LoginHandler, LogoutHandler
+from handlers.snippets import CreateSnippetHandler, MySnippetsHandler, DeleteSnippetHandler
 
 
-class MainHandler(webapp2.RequestHandler):
+class MainHandler(BaseHandler):
     def get(self):
         snippets = Snippet.query().order(-Snippet.creation_date).fetch()
+        session = self.session.get('user')
+        is_logged = False
+        if session is not None:
+            is_logged = True
+
+        for snippet in snippets:
+            user = User.query(User.key == snippet.user).get()
+            snippet.completeuser = user
 
         data = {
+            "is_logged": is_logged,
             "snippets": snippets
         }
 
@@ -32,7 +45,17 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(jinja.render_template("index.html", **data))
 
 
+config = {}
+config['webapp2_extras.sessions'] = {
+    'secret_key': 'prepre',
+}
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/register', RegisterHandler)
-], debug=True)
+    ('/register', RegisterHandler),
+    ('/logout', LogoutHandler),
+    ('/login', LoginHandler),
+    ('/newsnippet', CreateSnippetHandler),
+    ('/mysnippets', MySnippetsHandler),
+    ('/mysnippets/delete', DeleteSnippetHandler)
+], debug=True, config=config)
