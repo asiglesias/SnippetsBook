@@ -5,19 +5,16 @@
         {% for snippet in snippets %}
             <div class="snippet" style="margin-bottom: 100px">
                 <h2 style="color: #A127F2">{{snippet.name}}</h2>
-                <div style="display: inline-flex;">
-                    <h5>{{snippet.completeuser.username}}</h5>
-                    <p style="color: lightgray; margin-left: 10px">{{snippet.creation_date}}</p>
-                </div>
+                <p style="color: lightgray;">{{snippet.creation_date.date()}}</p>
                 <p>{{snippet.description}}</p>
-                <div id="code{{snippet.key.id()}}">
+                <div id="code{{snippet.key.id()}}" style="font-size: medium">
 
                     <textarea id="codehidden{{snippet.key.id()}}">{{snippet.code}}</textarea>
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <div class="btn-group rate_group">
                         <button class="btn btn-purple" onclick="window.location.href='/mysnippets/delete?id={{ snippet.key.urlsafe() }}'"><i class="fas fa-trash"></i></button>
-                        <button class="btn btn-appdark"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-appdark" onclick="window.location.href='/editsnippet?id={{ snippet.key.urlsafe() }}'"><i class="fas fa-edit"></i></button>
                     </div>
                 </div>
             </div>
@@ -34,6 +31,6 @@
         {% endfor %}
     {% else %}
         <h3 style="text-align: center; margin-top: 10%">You have not created any snippet yet</h3>
-        <button class="btn btn-purple" href="/newsnippet">Create my first snippet!</button>
+        <center><button class="btn btn-purple" href="/newsnippet">Create my first snippet!</button></center>
     {% endif %}
 {% endblock content%}

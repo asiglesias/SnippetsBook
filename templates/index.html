@@ -7,10 +7,10 @@
                 <h2 style="color: #A127F2">{{snippet.name}}</h2>
                 <div style="display: inline-flex;">
                     <h5>{{snippet.completeuser.username}}</h5>
-                    <p style="color: lightgray; margin-left: 10px">{{snippet.creation_date}}</p>
+                    <p style="color: lightgray; margin-left: 10px">{{snippet.creation_date.date()}}</p>
                 </div>
                 <p>{{snippet.description}}</p>
-                <div id="code{{snippet.key.id()}}">
+                <div id="code{{snippet.key.id()}}" style="font-size: medium">
 
                     <textarea id="codehidden{{snippet.key.id()}}">{{snippet.code}}</textarea>
                 </div>

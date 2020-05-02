@@ -21,7 +21,7 @@ from webapp2_extras import jinja2, sessions
 from handlers.register import RegisterHandler
 from handlers.base import BaseHandler
 from handlers.login import LoginHandler, LogoutHandler
-from handlers.snippets import CreateSnippetHandler, MySnippetsHandler, DeleteSnippetHandler
+from handlers.snippets import CreateSnippetHandler, MySnippetsHandler, DeleteSnippetHandler, EditSnippetHandler
 
 
 class MainHandler(BaseHandler):
@@ -57,5 +57,6 @@ app = webapp2.WSGIApplication([
     ('/login', LoginHandler),
     ('/newsnippet', CreateSnippetHandler),
     ('/mysnippets', MySnippetsHandler),
-    ('/mysnippets/delete', DeleteSnippetHandler)
+    ('/mysnippets/delete', DeleteSnippetHandler),
+    ('/editsnippet', EditSnippetHandler)
 ], debug=True, config=config)

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block moreHeaders %}
+    <link rel="stylesheet" href="css/create_snippet.css"/>
+{% endblock %}
+{% block content %}
+    <div id="newsnippetcontainer">
+        <h2>Edit snippet</h2>
+        <form onsubmit="return validateAll()" method="post" action="/editsnippet?id={{snippet.key.urlsafe()}}" >
+            <div class="form-group">
+                <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ snippet.name }}" />
+                    <div class="invalid-feedback">
+                        The title can not be empty
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+
+                    <textarea class="form-control" id="description" name="description">{{ snippet.description }}</textarea>
+                    <div class="invalid-feedback">
+                        The description can not be empty
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label for="code">Code</label>
+
+                <div id="code"></div>
+                <div class="invalid-feedback">
+                    The code can not be empty
+                </div>
+            </div>
+            <input type="hidden" name="code" id="hiddencode" value="{{ snippet.code }}" />
+            <center><input type="submit" value="Edit snippet" class="btn btn-purple" style="margin-bottom: 20px"/></center>
+        </form>
+        <script>
+
+            var myCodeMirror = CodeMirror(document.getElementById("code"), {
+                    value: $("#hiddencode").val(),
+                    theme: "monokai",
+                    cursorHeight: 0.85,
+                    mode: "text/x-csharp"
+                });
+
+            function validateAll()
+            {
+                let title = document.getElementById("title").value;
+                let description = document.getElementById("description").value;
+                let code = myCodeMirror.getValue();
+                let hiddencode = document.getElementById("hiddencode");
+
+
+                let allValid = true;
+                if(title.length <= 0)
+                {
+                    allValid = false;
+                    $("#title").addClass('is-invalid');
+                }
+
+                if(description.length <= 0)
+                {
+                    allValid = false;
+                    $("#description").addClass('is-invalid');
+                }
+
+                if(code.length <= 0)
+                {
+                    allValid = false;
+                    $("#code").addClass('is-invalid');
+                }
+
+                hiddencode.value = code;
+
+                return allValid;
+            }
+        </script>
+
+    </div>
+{% endblock %}

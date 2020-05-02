@@ -38,8 +38,9 @@ class CreateSnippetHandler(BaseHandler):
 
         snippet = Snippet(code=code, name=title, description=description, user=user.key)
         k = snippet.put()
+        time.sleep(0.5)
 
-        self.redirect("/")
+        self.redirect("/mysnippets")
 
 
 class MySnippetsHandler(BaseHandler):
@@ -78,6 +79,67 @@ class DeleteSnippetHandler(BaseHandler):
             snippet.key.delete()
             time.sleep(0.5)
             return self.redirect("/mysnippets")
+
+
+class EditSnippetHandler(BaseHandler):
+    def get(self):
+        if not self.is_logged_user():
+            self.redirect('/login')
+            return
+
+        id = self.request.get("id", None)
+
+        if  id is None:
+            return self.redirect('/mysnippets')
+
+        snippet = ndb.Key(urlsafe=id).get()
+        user_snippet = snippet.user.get()
+        if not user_snippet.username == self.session.get("user"):
+            return self.redirect('/mysnippets')
+
+        data = {
+            'snippet': snippet,
+            'is_logged': self.is_logged_user()
+        }
+
+        jinja = jinja2.get_jinja2(app=self.app)
+        return self.response.write(jinja.render_template('snippets/edit_snippet.html', **data))
+
+    def post(self):
+        jinja = jinja2.get_jinja2(app=self.app)
+
+        if not self.is_logged_user():
+            self.redirect("/login")
+            return
+
+        id = self.request.get("id", None)
+
+        if id is None:
+            return self.redirect('/mysnippets')
+
+        snippet = ndb.Key(urlsafe=id).get()
+
+
+        title = self.request.get("title", None)
+        description = self.request.get("description", None)
+        code = self.request.get("code", None)
+
+
+
+        if title is None or description is None or code is None:
+            self.redirect("/newsnippet")
+            return
+
+
+        snippet.name = title
+        snippet.description = description
+        snippet.code = code
+        k = snippet.put()
+        time.sleep(0.5)
+        self.redirect("/mysnippets")
+
+
+
 
 
 
