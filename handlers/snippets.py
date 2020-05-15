@@ -6,6 +6,7 @@ from handlers.base import BaseHandler
 from models.snippet import Snippet
 from google.appengine.ext import ndb
 import time
+from models.usersnippet import Rate
 
 
 
@@ -137,6 +138,52 @@ class EditSnippetHandler(BaseHandler):
         k = snippet.put()
         time.sleep(0.5)
         self.redirect("/mysnippets")
+
+class RateSnippetHandler(BaseHandler):
+    def get(self):
+        jinja = jinja2.get_jinja2(app=self.app)
+
+        if not self.is_logged_user():
+            self.redirect("/login")
+            return
+
+        id = self.request.get("id", None)
+        valoration_positive = False if self.request.get("positive", 'False') == 'False' else True
+
+        if id is None:
+            return self.redirect('/mysnippets')
+
+        snippet = ndb.Key(urlsafe=id).get()
+
+        user = User.query(User.username == self.session.get('user')).get()
+        rate = Rate.query(Rate.user == user.key, Rate.snippet == snippet.key).get()
+        if rate:
+            if valoration_positive == rate.positive_valoration:
+                return self.redirect('/')
+            else:
+                rate.positive_valoration = valoration_positive
+                rate.put()
+                if valoration_positive:
+                    snippet.score += 1
+                else:
+                    snippet.score -= 1
+                snippet.put()
+                time.sleep(0.5)
+                return self.redirect('/')
+
+
+        rate = Rate(user=user.key, snippet=snippet.key, positive_valoration=valoration_positive)
+
+        if valoration_positive:
+            snippet.score += 1
+        else:
+            snippet.score -= 1
+
+        rate.put()
+        snippet.put()
+        time.sleep(0.5)
+        return self.redirect('/')
+
 
 
 

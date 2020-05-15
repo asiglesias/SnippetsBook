@@ -14,13 +14,23 @@
 
                     <textarea id="codehidden{{snippet.key.id()}}">{{snippet.code}}</textarea>
                 </div>
+                {% if is_logged %}
                 <div style="text-align: center; margin-top: 20px;">
                     <div class="btn-group rate_group">
-                        <button class="btn btn-appdark"><i class="fas fa-minus" style="margin-right: 5px"></i><i class="fas fa-minus"></i></button>
+                        {% if snippet.user_valoration == True  %}
+                        <button class="btn btn-appdark" onclick="window.location.href='/rate?id={{ snippet.key.urlsafe() }}'"><i class="fas fa-minus" style="margin-right: 5px"></i><i class="fas fa-minus"></i></button>
                         <p style="margin: 10px;">{{snippet.score}}</p>
-                        <button class="btn btn-purple"><i class="fas fa-plus" style="margin-right: 5px"></i><i class="fas fa-plus"></i></button>
+                        {% elif snippet.user_valoration == False  %}
+                        <p style="margin: 10px;">{{snippet.score}}</p>
+                        <button class="btn btn-purple" onclick="window.location.href='/rate?id={{ snippet.key.urlsafe() }}&positive=True'"><i class="fas fa-plus" style="margin-right: 5px"></i><i class="fas fa-plus"></i></button>
+                        {% else %}
+                        <button class="btn btn-appdark" onclick="window.location.href='/rate?id={{ snippet.key.urlsafe() }}'"><i class="fas fa-minus" style="margin-right: 5px"></i><i class="fas fa-minus"></i></button>
+                        <p style="margin: 10px;">{{snippet.score}}</p>
+                        <button class="btn btn-purple" onclick="window.location.href='/rate?id={{ snippet.key.urlsafe() }}&positive=True'"><i class="fas fa-plus" style="margin-right: 5px"></i><i class="fas fa-plus"></i></button>
+                        {% endif %}
                     </div>
                 </div>
+                {% endif %}
             </div>
             <script>
                 CodeMirror(document.getElementById("code{{snippet.key.id()}}"), {
